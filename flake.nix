@@ -20,12 +20,12 @@
             buildDepends = with pkgs.haskellPackages; [
               blaze-html
               typed-process
-              (pkgs.haskellPackages.callHackageDirect {
+              (callHackageDirect {
                 pkg = "relude";
                 ver = "1.0.0.1";
                 sha256 = "sha256-tpv6QvG8jhAO8tvfehPuyqJBQNosDaS/83cwMkYQl5g=";
               } { })
-              (pkgs.haskellPackages.callHackageDirect {
+              (callHackageDirect {
                 pkg = "dhall";
                 ver = "1.41.1";
                 sha256 = "sha256-M2pp0ht/KW3U9947unlQXX0T890uq1MVxkpkOkL2LKI=";
