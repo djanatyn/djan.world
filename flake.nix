@@ -36,6 +36,7 @@
                   } { })
                 ]))
               pkgs.dhall # dhall cli
+              pkgs.zlib
             ];
 
             buildPhase = ''
