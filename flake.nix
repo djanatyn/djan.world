@@ -15,7 +15,7 @@
           djan-world = pkgs.stdenv.mkDerivation {
             name = "djan-world";
             version = "0.1.0";
-            src = ./src;
+            src = ./.;
 
             buildInputs = with pkgs.haskell; [
               (packages.ghc902.ghcWithPackages (haskellPackages:
@@ -23,20 +23,23 @@
                   blaze-html
                   typed-process
                   (pkgs.haskellPackages.callHackageDirect {
-                      pkg = "relude";
-                      ver = "1.0.0.1";
-                      sha256 = "sha256-tpv6QvG8jhAO8tvfehPuyqJBQNosDaS/83cwMkYQl5g=";
-                    } {})
-                  dhall
+                    pkg = "relude";
+                    ver = "1.0.0.1";
+                    sha256 =
+                      "sha256-tpv6QvG8jhAO8tvfehPuyqJBQNosDaS/83cwMkYQl5g=";
+                  } { })
+                  (pkgs.haskellPackages.callHackageDirect {
+                    pkg = "dhall";
+                    ver = "1.41.1";
+                    sha256 =
+                      "sha256-M2pp0ht/KW3U9947unlQXX0T890uq1MVxkpkOkL2LKI=";
+                  } { })
                 ]))
-              pkgs.dhall
-              pkgs.cabal-install
-              pkgs.wkhtmltopdf
+              pkgs.dhall # dhall cli
             ];
 
             buildPhase = ''
-              # run source to
-              cabal run djan-world
+              runhaskell $src/app/Main.hs
             '';
 
             installPhase = ''
