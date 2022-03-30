@@ -22,7 +22,11 @@
                 with haskellPackages; [
                   blaze-html
                   typed-process
-                  relude
+                  (pkgs.haskellPackages.callHackageDirect {
+                      pkg = "relude";
+                      ver = "1.0.0.1";
+                      sha256 = "sha256-tpv6QvG8jhAO8tvfehPuyqJBQNosDaS/83cwMkYQl5g=";
+                    } {})
                   dhall
                 ]))
               pkgs.dhall
