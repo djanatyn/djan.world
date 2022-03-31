@@ -13,7 +13,10 @@ library
         relude ^>=1.0.0.1,
         blaze-html ^>=0.9.1.2,
         dhall ^>=1.41.1,
-        typed-process ^>=0.2.8.0
+        typed-process ^>=0.2.8.0,
+        tasty ^>=1.4.2.1,
+        tasty-hunit ^>=0.10.0.3,
+        co-log ^>=0.4.0.1
 
 executable djan-world
     main-is:          Main.hs
