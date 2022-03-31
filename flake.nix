@@ -22,7 +22,7 @@
               typed-process
               tasty
               tasty-hunit
-              co-log
+              co-log-core
               (callHackageDirect {
                 pkg = "relude";
                 ver = "1.0.0.1";

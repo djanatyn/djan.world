@@ -16,7 +16,7 @@ library
         typed-process ^>=0.2.8.0,
         tasty ^>=1.4.2.1,
         tasty-hunit ^>=0.10.0.3,
-        co-log ^>=0.4.0.1
+        co-log-core ^>=0.3.1.0
 
 executable djan-world
     main-is:          Main.hs
