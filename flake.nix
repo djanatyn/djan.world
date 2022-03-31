@@ -30,6 +30,7 @@
                 ver = "1.41.1";
                 sha256 = "sha256-M2pp0ht/KW3U9947unlQXX0T890uq1MVxkpkOkL2LKI=";
               } { })
+              pkgs.zlib
             ];
           };
 
