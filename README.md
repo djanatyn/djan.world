@@ -33,6 +33,8 @@ first of all, dhall is neat! but also, it provides:
 * a quick way to compare content between revisions: (`dhall diff < index.dhall`)
 * dhall performs type-checking for partial post metadata, showing errors ahead of time
 * easy to derive parsers in haskell (`derive FromDhall`)
+* wonderful tooling, formatter, and linting support (`dhall help`)
+* simple conversion between formats (`dhall-to-yaml`, `dhall-to-json`)
 
 ### pull dates from git revision history
 
