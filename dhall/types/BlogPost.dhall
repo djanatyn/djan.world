@@ -1,2 +1,7 @@
-  { content : Text, filename : Text, tags : List Text, authors : List Text }
+  { content : Text
+  , title : Text
+  , filename : Text
+  , tags : List Text
+  , authors : List Text
+  }
 : Type
