@@ -1,6 +1,6 @@
 let List/map = https://prelude.dhall-lang.org/List/map
 
-let items = ./dark-souls-items.dhall
+let items = ./dhall/test-data/dark-souls-items.dhall
 
 let types = ./types.dhall
 
@@ -16,7 +16,7 @@ let itemToPost =
 
         let tags = [ item.effect ] : List Text
 
-        let authors = [ "FROM SOFTWARE" ] : list Text
+        let authors = [ "FROM SOFTWARE" ] : List Text
 
         in  { content, title, filename, tags, authors } : types.BlogPost
 
