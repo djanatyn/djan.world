@@ -22,6 +22,7 @@ github:djanatyn/djan.world/06fc80e6039df48e7ad5beb1d21df33c2c908b17
 * [`blaze-html`](https://hackage.haskell.org/package/blaze-html) for generating html
 * [`relude`](https://hackage.haskell.org/package/relude) for comfort
 * [`typed-process`](https://hackage.haskell.org/package/typed-process) for scripting
+* [`co-log-core`](https://hackage.haskell.org/package/co-log-core) for logging
 
 ## design choices
 
