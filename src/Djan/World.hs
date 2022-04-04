@@ -11,11 +11,15 @@ module Djan.World
 
     -- * Load
     loadBlog,
+
+    -- * Render
+    renderPage,
   )
 where
 
 import Dhall (FromDhall, Generic, auto, inputFile)
 import Relude
+import Text.Blaze.Html5 (Html)
 
 data BlogPost where
   BlogPost ::
@@ -34,3 +38,6 @@ data Blog where
 
 loadBlog :: IO Blog
 loadBlog = inputFile (auto @Blog) "./index.dhall"
+
+renderPage :: BlogPost -> IO Html
+renderPage = undefined
