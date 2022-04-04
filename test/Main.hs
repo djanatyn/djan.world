@@ -15,8 +15,9 @@ tests :: TestTree
 tests =
   testGroup
     "Tests"
-    [ testCase "load blog" $ loadBlog >> pure (),
+    [ testCase "load blog" $
+        void loadBlog,
       testCase "render every page" $ do
         Blog {posts} <- loadBlog
-        traverse renderPage posts >> pure ()
+        void $ traverse renderPage posts
     ]
