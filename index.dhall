@@ -20,4 +20,4 @@ let itemToPost =
 
         in  { content, title, filename, tags, authors } : types.BlogPost
 
-in  List/map Item types.BlogPost itemToPost items
+in  { posts = List/map Item types.BlogPost itemToPost items } : types.Blog

@@ -22,6 +22,8 @@
               typed-process
               tasty
               tasty-hunit
+              tasty-golden
+              directory
               co-log-core
               (callHackageDirect {
                 pkg = "relude";
