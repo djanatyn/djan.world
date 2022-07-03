@@ -77,6 +77,7 @@ loadIcons = do
 monospacedBody :: H.Html -> H.Html
 monospacedBody content = H.body content H.! A.class_ "is-family-monospace"
 
+-- | Navigation bar. Contains a planet icon.
 navBar :: Icons -> H.Html
 navBar Icons {planet} =
   ( H.nav $ do
@@ -94,6 +95,24 @@ navBar Icons {planet} =
   where
     (!) = (H.!)
 
+-- | Introductory header for front page.
+header :: H.Html
+header = H.div $ do
+  H.p "howdy!"
+  H.p "my name is Jonathan Strickland. i also go by {djan} and {djanatyn}."
+  H.p "i'm queer and non-binary. i use they/them pronouns!"
+  H.p $ do
+    "i love programming! i'm"
+    H.a "recurse center" ! A.href "https://www.recurse.com/about"
+    "alumni."
+  H.p $ do
+    "i main peach in super smash bros melee :) i enter a lot of "
+    H.a "netplay tournaments" ! A.href "https://www.start.gg/user/e666c731"
+    "on smash.gg."
+  H.p "this site is the output of a haskell program."
+  where
+    (!) = (H.!)
+
 -- | Build front page html, given a set of recent posts and highlighted projects.
 buildHomepage :: Icons -> HomePage -> H.Html
 buildHomepage icons (HomePage {recentPosts, projects}) = H.docTypeHtml $ do
@@ -108,6 +127,7 @@ buildHomepage icons (HomePage {recentPosts, projects}) = H.docTypeHtml $ do
     H.title "djan.world"
   monospacedBody $ do
     navBar icons
+    header
   where
     (!) = (H.!)
 
