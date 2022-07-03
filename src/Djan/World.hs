@@ -96,8 +96,8 @@ navBar Icons {planet} =
     (!) = (H.!)
 
 -- | Introductory header for front page.
-header :: H.Html
-header = H.div $ do
+welcomeHeader :: H.Html
+welcomeHeader = div $ do
   H.p "howdy!"
   H.p "my name is Jonathan Strickland. i also go by {djan} and {djanatyn}."
   H.p "i'm queer and non-binary. i use they/them pronouns!"
@@ -111,6 +111,7 @@ header = H.div $ do
     "on smash.gg."
   H.p "this site is the output of a haskell program."
   where
+    div content = H.div content ! A.class_ "content"
     (!) = (H.!)
 
 -- | Build front page html, given a set of recent posts and highlighted projects.
@@ -127,8 +128,13 @@ buildHomepage icons (HomePage {recentPosts, projects}) = H.docTypeHtml $ do
     H.title "djan.world"
   monospacedBody $ do
     navBar icons
-    header
+    section $ columns $ container $ do
+      H.h1 "djan.world" ! A.class_ "title"
+      welcomeHeader
   where
+    section content = H.section content ! A.class_ "section"
+    columns content = H.div content ! A.class_ "columns"
+    container content = H.div content ! A.class_ "container"
     (!) = (H.!)
 
 -- | Render HomePage as Text.
