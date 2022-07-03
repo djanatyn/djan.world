@@ -30,11 +30,6 @@
                 ver = "1.0.0.1";
                 sha256 = "sha256-tpv6QvG8jhAO8tvfehPuyqJBQNosDaS/83cwMkYQl5g=";
               } { })
-              (callHackageDirect {
-                pkg = "dhall";
-                ver = "1.41.1";
-                sha256 = "sha256-M2pp0ht/KW3U9947unlQXX0T890uq1MVxkpkOkL2LKI=";
-              } { })
               pkgs.zlib
             ];
           };
@@ -44,7 +39,7 @@
             version = "0.1.0";
             src = ./.;
 
-            buildInputs = with pkgs; [ djan-world dhall ];
+            buildInputs = with pkgs; [ djan-world ];
 
             buildPhase = ''
               # TODO: implement site generator

@@ -1,7 +1,4 @@
-{-# LANGUAGE DeriveAnyClass #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE GADTs #-}
-{-# LANGUAGE TypeApplications #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 
 module Djan.World
@@ -9,15 +6,11 @@ module Djan.World
     BlogPost (..),
     Blog (..),
 
-    -- * Load
-    loadBlog,
-
     -- * Render
     renderPage,
   )
 where
 
-import Dhall (FromDhall, Generic, auto, inputFile)
 import Relude
 import Text.Blaze.Html5 (Html)
 
@@ -30,14 +23,11 @@ data BlogPost where
       authors :: [Text]
     } ->
     BlogPost
-  deriving (Show, Generic, FromDhall)
+  deriving (Show)
 
 data Blog where
   Blog :: {posts :: [BlogPost]} -> Blog
-  deriving (Show, Generic, FromDhall)
-
-loadBlog :: IO Blog
-loadBlog = inputFile (auto @Blog) "./index.dhall"
+  deriving (Show)
 
 renderPage :: BlogPost -> IO Html
 renderPage = undefined
