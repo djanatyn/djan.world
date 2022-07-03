@@ -5,6 +5,7 @@ module Main where
 
 import Djan.World
   ( HomePage (..),
+    loadIcons,
     renderHomepage,
   )
 import Relude
@@ -18,4 +19,6 @@ home =
     }
 
 main :: IO ()
-main = renderHomepage home >>= putText
+main = do
+  icons <- loadIcons
+  putText $ renderHomepage icons home
