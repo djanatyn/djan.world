@@ -12,6 +12,7 @@ library
         base ^>=4.15.0,
         relude ^>=1.0.0.1,
         blaze-html ^>=0.9.1.2,
+        blaze-svg ^>= 0.3.6.1,
         typed-process ^>=0.2.8.0,
         co-log-core ^>=0.3.1.0
 

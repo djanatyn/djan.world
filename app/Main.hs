@@ -1,9 +1,21 @@
+{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 
 module Main where
 
+import Djan.World
+  ( HomePage (..),
+    renderHomepage,
+  )
 import Relude
-import Djan.World as World
+
+-- | Site homepage.
+home :: HomePage
+home =
+  HomePage
+    { recentPosts = [],
+      projects = []
+    }
 
 main :: IO ()
-main = putStrLn "hi"
+main = renderHomepage home >>= putText

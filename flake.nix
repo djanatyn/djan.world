@@ -19,6 +19,7 @@
             license = null;
             buildDepends = with pkgs.haskellPackages; [
               blaze-html
+              blaze-svg
               typed-process
               tasty
               tasty-hunit
