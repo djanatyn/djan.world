@@ -7,11 +7,14 @@
 module Djan.World
   ( -- * Types
     HomePage (..),
-    BlogPost,
-    Project,
-    Icons,
+    BlogPost (..),
+    Project (..),
+    Icons (..),
+
+    -- * Load Assets
     loadIcons,
-    -- HomePage
+
+    -- * Front Page (HomePage)
     buildHomepage,
     renderHomepage,
   )
@@ -24,7 +27,6 @@ import qualified Text.Blaze.Html5 as H
 import qualified Text.Blaze.Html5.Attributes as A
 import qualified Text.Blaze.Svg11 as S
 import qualified Text.Blaze.Svg11.Attributes as SA
-import Text.Show.Functions
 
 -- | Front page.
 data HomePage where
@@ -114,6 +116,13 @@ welcomeHeader = div $ do
     div content = H.div content ! A.class_ "content"
     (!) = (H.!)
 
+-- | Load Bulma 0.9.4 stylesheet from cdn.jsdelivr.net.
+bulmaStylesheet :: H.Html
+bulmaStylesheet =
+  H.link
+    H.! A.rel "stylesheet"
+    H.! A.href "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+
 -- | Build front page html, given a set of recent posts and highlighted projects.
 buildHomepage :: Icons -> HomePage -> H.Html
 buildHomepage icons (HomePage {recentPosts, projects}) = H.docTypeHtml $ do
@@ -122,15 +131,15 @@ buildHomepage icons (HomePage {recentPosts, projects}) = H.docTypeHtml $ do
     H.meta
       ! A.name "viewport"
       ! A.content "width=device-width, initial-scale=1"
-    H.link
-      ! A.rel "stylesheet"
-      ! A.href "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    bulmaStylesheet
     H.title "djan.world"
   monospacedBody $ do
     navBar icons
-    section $ columns $ container $ do
-      H.h1 "djan.world" ! A.class_ "title"
-      welcomeHeader
+    section $
+      columns $
+        container $ do
+          H.h1 "djan.world" ! A.class_ "title"
+          welcomeHeader
   where
     section content = H.section content ! A.class_ "section"
     columns content = H.div content ! A.class_ "columns"
