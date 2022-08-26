@@ -15,7 +15,11 @@ tests :: TestTree
 tests =
   testGroup
     "Tests"
-    [ testCase "render homepage" $ do
+    [ -- testCase "load icons"
+      -- testCase "load all posts"
+      -- testCase "render all posts"
+      -- testCase "check for dead links"
+      testCase "render homepage" $ do
         icons <- loadIcons
         print $ renderHomepage icons (HomePage { recentPosts = [], projects = [] })
     ]
