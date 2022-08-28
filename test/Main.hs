@@ -3,7 +3,11 @@
 
 module Main where
 
-import Djan.World as World
+import Djan.World
+  ( HomePage (..),
+    loadIcons,
+    renderHomepage,
+  )
 import Relude
 import Test.Tasty
 import Test.Tasty.HUnit
@@ -21,5 +25,6 @@ tests =
       -- testCase "check for dead links"
       testCase "render homepage" $ do
         icons <- loadIcons
-        print $ renderHomepage icons (HomePage { recentPosts = [], projects = [] })
+        let empty = HomePage {recentPosts = [], projects = []}
+         in print $ renderHomepage icons empty
     ]
