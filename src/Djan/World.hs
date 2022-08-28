@@ -137,12 +137,14 @@ buildHomepage icons (HomePage {recentPosts, projects}) = H.docTypeHtml $ do
     navBar icons
     section $
       columns $
-        container $ do
-          H.h1 "djan.world" ! A.class_ "title"
-          welcomeHeader
+        column $
+          container $ do
+            H.h1 "djan.world" ! A.class_ "title"
+            welcomeHeader
   where
     section content = H.section content ! A.class_ "section"
     columns content = H.div content ! A.class_ "columns"
+    column content = H.div content ! A.class_ "column" ! A.class_ "is-10" ! A.class_ "is-offset-1"
     container content = H.div content ! A.class_ "container"
     (!) = (H.!)
 
