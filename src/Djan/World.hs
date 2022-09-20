@@ -28,6 +28,30 @@ import qualified Text.Blaze.Html5.Attributes as A
 import qualified Text.Blaze.Svg11 as S
 import qualified Text.Blaze.Svg11.Attributes as SA
 
+-- isTitle :: Node -> Bool
+-- isTitle (Node {nodeName = Identifier "title"}) = True
+-- isTitle _ = False
+
+-- ghci> filter isTitle $ docNodes parsedMeta
+-- [ Node
+--   { nodeAnn = Nothing
+--   , nodeName = Identifier "title"
+--   , nodeArgs =
+--     [ Value { valueAnn = Nothing
+--             , valueExp = StringValue "Blog Post 1"
+--             }
+--     ]
+--   , nodeProps = fromList []
+--   , nodeChildren = []
+--   }
+-- ]
+
+-- ghci> concatMap (fmap valueExp . nodeArgs) $ filter isTitle $ docNodes parsedMeta
+-- [StringValue "Blog Post 1"]
+
+-- ghci> post <- fromMaybe (error "failed") . viaNonEmpty tail . lines . toText <$> readFile "posts/nix-scripting.md"
+-- ghci> meta = Data.Text.strip . unlines . fst $ L.splitAt (fromMaybe (error "failed") $ L.elemIndex (toText "---") post) post
+
 -- | Front page.
 data HomePage where
   HomePage ::
@@ -104,17 +128,82 @@ welcomeHeader = div $ do
   H.p "my name is Jonathan Strickland. i also go by {djan} and {djanatyn}."
   H.p "i'm queer and non-binary. i use they/them pronouns!"
   H.p $ do
-    "i love programming! i'm"
-    H.a "recurse center" ! A.href "https://www.recurse.com/about"
-    "alumni."
+    "i love"
+    H.a "programming!" ! A.href "https://github.com/djanatyn"
+    "i'm" >> H.a "recurse center" ! A.href "https://www.recurse.com/about" >> "alumni."
   H.p $ do
     "i main peach in super smash bros melee :) i enter a lot of "
     H.a "netplay tournaments" ! A.href "https://www.start.gg/user/e666c731"
     "on smash.gg."
-  H.p "this site is the output of a haskell program."
+  H.p $ do
+    "this site is the output of a"
+    H.a "haskell program." ! A.href "https://github.com/djanatyn/djan.world"
   where
     div content = H.div content ! A.class_ "content"
     (!) = (H.!)
+
+-- | Section for recent blog posts.
+--
+-- <!-- blog -->
+-- <h2>blog posts</h2>
+-- <div class="box">
+--   <a href="">date - blog post 1</a>
+--   <p>description of blog post</p>
+--   <span class="tag">nix</span>
+--   <span class="tag">super smash bros melee</span>
+-- </div>
+-- <div class="box">
+--   <a href="">date - blog post 2</a>
+--   <p>description of blog post</p>
+--   <span class="tag">nix</span>
+--   <span class="tag">super smash bros melee</span>
+-- </div>
+-- <div class="box">
+--   <a href="">date - blog post 3</a>
+--   <p>description of blog post</p>
+--   <span class="tag">nix</span>
+--   <span class="tag">super smash bros melee</span>
+-- </div>
+-- <hr>
+blogPostSection :: [BlogPost] -> H.Html
+blogPostSection = undefined
+
+-- | Section for projects.
+-- <!-- projects -->
+-- <h2>projects</h2>
+-- <div class="box">
+--   <a href="https://github.com/djanatyn/ssbm-nix">ssbm-nix</a>
+--   <p>Nix expressions for Super Smash Bros. Melee players.</p>
+--   <span class="tag">nix</span>
+--   <span class="tag">super smash bros melee</span>
+-- </div>
+-- <div class="box">
+--   <a href="https://github.com/djanatyn/melee-dat">melee-dat</a>
+--   <p>Replace DAT files within a v1.02 NTSC GALE01 GCM disk image.</p>
+--   <span class="tag">rust</span>
+--   <span class="tag">super smash bros melee</span>
+-- </div>
+-- <div class="box">
+--   <a href="https://github.com/djanatyn/resume">resume</a>
+--   <p>work resume (built using nix flakes + dhall + haskell)</p>
+--   <span class="tag">haskell</span>
+--   <span class="tag">dhall</span>
+--   <span class="tag">nix</span>
+-- </div>
+projectSection :: [Project] -> H.Html
+projectSection = undefined
+
+-- | Footer for git revision + credits.
+-- <footer class="footer">
+--   <div class="content has-text-centered">
+--     <svg></svg>
+--     <p>rev <strong>f603995031f5c12f4d924e6c05cf552d0de39bd7</strong> - Mon Apr 4 12:31:52 2022 -0400</p>
+--     <p>icons used are from <a href="https://ionic.io/ionicons"> ionicons</a>. styled with <a href="https://bulma.io/">bulma</a>.</p>
+--     <p></p>
+--   </div>
+-- </footer>
+footerSection :: H.Html
+footerSection = undefined
 
 -- | Load Bulma 0.9.4 stylesheet from cdn.jsdelivr.net.
 bulmaStylesheet :: H.Html
