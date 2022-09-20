@@ -9,6 +9,16 @@
       forAllSystems = f:
         nixpkgs.lib.genAttrs supportedSystems (system: f system);
     in {
+      devShells = forAllSystems (system:
+        let pkgs = import nixpkgs { inherit system; };
+        in {
+          djan-world = pkgs.mkShell {
+            buildInputs = with pkgs; [
+              haskell.compiler
+              zlib.dev
+            ];
+          };
+        });
       packages = forAllSystems (system:
         let pkgs = import nixpkgs { inherit system; };
         in rec {
