@@ -106,15 +106,17 @@ monospacedBody content = H.body content H.! A.class_ "is-family-monospace"
 -- | Navigation bar. Contains a planet icon.
 navBar :: Icons -> H.Html
 navBar Icons {planet} =
-  ( H.nav $ do
-      ( H.div $ do
-          H.a planet ! A.class_ "navbar-item"
-          H.a "home" ! A.class_ "navbar-item" ! A.href "TODO"
-          H.a "about" ! A.class_ "navbar-item" ! A.href "TODO"
-          H.a "blog" ! A.class_ "navbar-item" ! A.href "TODO"
-        )
-        ! A.class_ "navbar-brand"
-  )
+  H.nav
+    ( do
+        H.div
+          ( do
+              H.a planet ! A.class_ "navbar-item"
+              H.a "home" ! A.class_ "navbar-item" ! A.href "TODO"
+              H.a "about" ! A.class_ "navbar-item" ! A.href "TODO"
+              H.a "blog" ! A.class_ "navbar-item" ! A.href "TODO"
+          )
+          ! A.class_ "navbar-brand"
+    )
     ! A.class_ "navbar"
     ! A.role "navigation"
     ! T.customAttribute "aria-label" "main navigation"
@@ -208,7 +210,6 @@ bulmaStylesheet =
   H.link
     H.! A.rel "stylesheet"
     H.! A.href "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
-
 
 -- | Build front page html, given a set of recent posts and highlighted projects.
 buildHomepage :: Icons -> HomePage -> H.Html
