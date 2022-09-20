@@ -23,8 +23,8 @@ where
 import Relude
 import qualified Text.Blaze as T
 import Text.Blaze.Html.Renderer.Pretty (renderHtml)
-import qualified Text.Blaze.Html5 as H
-import qualified Text.Blaze.Html5.Attributes as A
+import Text.Blaze.Html5 as H
+import Text.Blaze.Html5.Attributes as A
 import qualified Text.Blaze.Svg11 as S
 import qualified Text.Blaze.Svg11.Attributes as SA
 
@@ -106,22 +106,12 @@ monospacedBody content = H.body content H.! A.class_ "is-family-monospace"
 -- | Navigation bar. Contains a planet icon.
 navBar :: Icons -> H.Html
 navBar Icons {planet} =
-  H.nav
-    ( do
-        H.div
-          ( do
-              H.a planet ! A.class_ "navbar-item"
-              H.a "home" ! A.class_ "navbar-item" ! A.href "TODO"
-              H.a "about" ! A.class_ "navbar-item" ! A.href "TODO"
-              H.a "blog" ! A.class_ "navbar-item" ! A.href "TODO"
-          )
-          ! A.class_ "navbar-brand"
-    )
-    ! A.class_ "navbar"
-    ! A.role "navigation"
-    ! T.customAttribute "aria-label" "main navigation"
-  where
-    (!) = (H.!)
+  H.nav ! A.class_ "navbar" ! A.role "navigation" ! T.customAttribute "aria-label" "main navigation" $ do
+    H.div ! A.class_ "navbar-brand" $ do
+      H.a planet ! A.class_ "navbar-item"
+      H.a "home" ! A.class_ "navbar-item" ! A.href "TODO"
+      H.a "about" ! A.class_ "navbar-item" ! A.href "TODO"
+      H.a "blog" ! A.class_ "navbar-item" ! A.href "TODO"
 
 -- | Introductory header for front page.
 welcomeHeader :: H.Html
@@ -142,7 +132,6 @@ welcomeHeader = div $ do
     H.a "haskell program." ! A.href "https://github.com/djanatyn/djan.world"
   where
     div content = H.div content ! A.class_ "content"
-    (!) = (H.!)
 
 blankPost :: BlogPost
 blankPost =
@@ -158,11 +147,10 @@ blankPost =
 -- | Section for recent blog posts.
 blogPostSection :: [BlogPost] -> [H.Html]
 blogPostSection posts =
-  let (!) = (H.!)
-      box content = H.div content ! A.class_ "box"
+  let box content = H.div content ! A.class_ "box"
       buildEntry (BlogPost {title, tags}) =
         box $ do
-          H.a (H.toHtml title) ! A.href ""
+          H.a ! A.href "" $ H.toHtml title
           H.p "description of blog post"
           mapM_ (\tag -> H.span (H.toHtml tag) ! A.class_ "tag") tags
    in buildEntry <$> posts
@@ -223,20 +211,14 @@ buildHomepage icons (HomePage {recentPosts, projects}) = H.docTypeHtml $ do
     H.title "djan.world"
   monospacedBody $ do
     navBar icons
-    section $
-      columns $ do
-        column $
-          container $ do
+    H.section ! A.class_ "section" $
+      H.div ! A.class_ "columns" $
+        H.div ! A.class_ "column" ! A.class_ "is-10" ! A.class_ "is-offset-1" $ do
+          H.div ! A.class_ "container" $ do
             H.h1 "djan.world" ! A.class_ "title"
             welcomeHeader
             H.h2 "blog posts" ! A.class_ "title"
-            H.div (sequence_ $ blogPostSection $ replicate 10 blankPost) ! A.class_ "content"
-  where
-    section content = H.section content ! A.class_ "section"
-    columns content = H.div content ! A.class_ "columns"
-    column content = H.div content ! A.class_ "column" ! A.class_ "is-10" ! A.class_ "is-offset-1"
-    container content = H.div content ! A.class_ "container"
-    (!) = (H.!)
+            H.div ! A.class_ "content" $ sequence_ $ blogPostSection $ replicate 10 blankPost
 
 -- | Render HomePage as Text.
 -- |
