@@ -142,31 +142,28 @@ welcomeHeader = div $ do
     div content = H.div content ! A.class_ "content"
     (!) = (H.!)
 
+blankPost :: BlogPost
+blankPost =
+  BlogPost
+    { content = "...",
+      slug = "...",
+      title = "title",
+      filename = "...",
+      tags = ["...", "...", "..."],
+      authors = ["..."]
+    }
+
 -- | Section for recent blog posts.
---
--- <!-- blog -->
--- <h2>blog posts</h2>
--- <div class="box">
---   <a href="">date - blog post 1</a>
---   <p>description of blog post</p>
---   <span class="tag">nix</span>
---   <span class="tag">super smash bros melee</span>
--- </div>
--- <div class="box">
---   <a href="">date - blog post 2</a>
---   <p>description of blog post</p>
---   <span class="tag">nix</span>
---   <span class="tag">super smash bros melee</span>
--- </div>
--- <div class="box">
---   <a href="">date - blog post 3</a>
---   <p>description of blog post</p>
---   <span class="tag">nix</span>
---   <span class="tag">super smash bros melee</span>
--- </div>
--- <hr>
-blogPostSection :: [BlogPost] -> H.Html
-blogPostSection = undefined
+blogPostSection :: [BlogPost] -> [H.Html]
+blogPostSection posts =
+  let (!) = (H.!)
+      box content = H.div content ! A.class_ "box"
+      buildEntry (BlogPost {title, tags}) =
+        box $ do
+          H.a (H.toHtml title) ! A.href ""
+          H.p "description of blog post"
+          mapM_ (\tag -> H.span (H.toHtml tag) ! A.class_ "tag") tags
+   in buildEntry <$> posts
 
 -- | Section for projects.
 -- <!-- projects -->
@@ -212,6 +209,7 @@ bulmaStylesheet =
     H.! A.rel "stylesheet"
     H.! A.href "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
 
+
 -- | Build front page html, given a set of recent posts and highlighted projects.
 buildHomepage :: Icons -> HomePage -> H.Html
 buildHomepage icons (HomePage {recentPosts, projects}) = H.docTypeHtml $ do
@@ -225,11 +223,13 @@ buildHomepage icons (HomePage {recentPosts, projects}) = H.docTypeHtml $ do
   monospacedBody $ do
     navBar icons
     section $
-      columns $
+      columns $ do
         column $
           container $ do
             H.h1 "djan.world" ! A.class_ "title"
             welcomeHeader
+            H.h2 "blog posts" ! A.class_ "title"
+            H.div (sequence_ $ blogPostSection $ replicate 10 blankPost) ! A.class_ "content"
   where
     section content = H.section content ! A.class_ "section"
     columns content = H.div content ! A.class_ "columns"
