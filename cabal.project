@@ -1,0 +1,6 @@
+packages: .
+
+source-repository-package
+    type: git
+    location: https://github.com/djanatyn/Hustle
+    tag: d98698811efae33adb823c47aaa3a623a8d7a319

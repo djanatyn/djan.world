@@ -15,7 +15,8 @@ library
         blaze-html ^>=0.9.1.2,
         blaze-svg ^>= 0.3.6.1,
         typed-process ^>=0.2.8.0,
-        co-log-core ^>=0.3.1.0
+        co-log-core ^>=0.3.1.0,
+        Hustle
 
 executable djan-world
     main-is:          Main.hs
