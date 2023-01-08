@@ -14,7 +14,7 @@
         in {
           djan-world = pkgs.mkShell {
             buildInputs = with pkgs; [
-              haskell.compiler
+              haskellPackages.ghc # ghc 9.0.2
               zlib.dev
             ];
           };
